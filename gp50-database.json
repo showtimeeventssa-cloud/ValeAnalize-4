@@ -1,0 +1,157 @@
+{
+  "device": "Valeton GP-50",
+  "reference": "Valeton GP-50 official documentation / firmware V1.0.5",
+  "audio": {
+    "bitDepth": 24,
+    "sampleRateHz": 44100,
+    "usbAudio": "2-in/2-out",
+    "midi": true
+  },
+  "modules": [
+    "NR",
+    "PRE",
+    "DST",
+    "N-S",
+    "AMP",
+    "CAB",
+    "EQ",
+    "MOD",
+    "DLY",
+    "RVB"
+  ],
+  "constraints": {
+    "maxSimultaneousModules": 9,
+    "irSlots": 20,
+    "namSlots": 80,
+    "patchSlots": 100,
+    "officialSamplingRateHz": 44100,
+    "officialBitDepth": 24,
+    "usbAudio": "2-in/2-out with re-amp"
+  },
+  "analysisTargets": [
+    "spectral envelope",
+    "multi-band energy",
+    "dynamics",
+    "crest factor",
+    "harmonicity proxy",
+    "pitch",
+    "transients",
+    "bandwidth",
+    "ambience/delay evidence",
+    "stereo/channel count"
+  ],
+  "matchingPolicy": {
+    "exactOriginalSettings": false,
+    "goal": "Find the closest reproducible GP-50 configuration from measured reference characteristics.",
+    "method": "Measured reference fingerprint followed by empirical comparison against a real GP-50 capture; single-file analysis alone cannot recover hidden original studio settings."
+  },
+  "v7Calibration": {
+    "enabled": true,
+    "method": "Reference recording vs actual GP-50 capture using matching DSP fingerprint features",
+    "note": "Calibration similarity is empirical feedback; it is not a claim of recovering unknown original studio settings."
+  },
+  "midi": {
+    "usbMidi": true,
+    "webMidiStage": "V8",
+    "implemented": [
+      "device enumeration",
+      "input monitor",
+      "output selection",
+      "standard MIDI Program Change"
+    ],
+    "notImplemented": [
+      "GP-50 parameter SysEx transfer"
+    ],
+    "reason": "Exact parameter/SysEx mapping should be taken from Valeton's GP-50 MIDI List before enabling automated preset writes."
+  },
+  "version": "V15",
+  "researchBasis": [
+    "Valeton GP-50 official product page, checked 2026-09-20",
+    "Valeton GP-50 Online Manual firmware V1.0.5, checked 2026-09-20",
+    "Valeton GP-50 firmware V1.0.5 download page, checked 2026-09-20",
+    "Independent GP-50 editor/reverse-engineering documentation used only for cross-checking device constraints, not as a substitute for Valeton documentation",
+    "Owner/community reports cross-checked for practical SnapTone/NAM/IR behaviour"
+  ],
+  "v10Calibration": {
+    "enabled": true,
+    "comparison": "reference recording vs GP-50 capture",
+    "score": "empirical fingerprint similarity",
+    "adjustments": [
+      "treble/upper-mid",
+      "low/low-mid",
+      "dynamics/gain staging",
+      "harmonic structure",
+      "bandwidth/cab/IR",
+      "ambience"
+    ],
+    "note": "Calibration is measurement-based feedback, not proof of the original preset."
+  },
+  "snapToneResearch": {
+    "official": "Valeton describes SnapTone/NAM support with up to 80 stored files and 50 curated files.",
+    "practicalConstraint": "Independent GP-50 documentation and owner reports indicate SnapTone operation has routing limitations around AMP/CAB/IR. ValeAnalize therefore treats SnapTone as a distinct route and validates it empirically instead of assuming AMP+IR layering is always available.",
+    "namCompatibility": "Community reverse-engineering reports that the GP-50 workflow accepts NAM A1 rather than NAM A2; this is treated as a compatibility warning, not as an invented Valeton specification."
+  },
+  "matchingEngineV12": {
+    "principles": [
+      "mastering-invariant spectral shape",
+      "multi-band energy ratios",
+      "dynamics/crest",
+      "harmonicity/pitch evidence",
+      "transient/ambience evidence",
+      "empirical GP-50 capture calibration"
+    ],
+    "antiFalsePrecision": true,
+    "finalValidation": "reference vs real GP-50 USB/recorded capture"
+  },
+  "guitarProfiles": {
+    "squier-debut": {
+      "name": "Squier by Fender Debut",
+      "type": "electric",
+      "pickup": "SSS",
+      "output": "passive",
+      "position": "bridge",
+      "tuning": "E A D G B E",
+      "strings": "10-46",
+      "scale": "25.5 in"
+    },
+    "ibanez-acoustic": {
+      "name": "Ibanez Acoustic",
+      "type": "acoustic-piezo",
+      "pickup": "Piezo (starting profile)",
+      "output": "active",
+      "position": "bridge",
+      "tuning": "E A D G B E",
+      "strings": "12-53"
+    },
+    "sigma-acoustic": {
+      "name": "Sigma Acoustic",
+      "type": "acoustic-piezo",
+      "pickup": "Piezo (starting profile)",
+      "output": "active",
+      "position": "bridge",
+      "tuning": "E A D G B E",
+      "strings": "12-53"
+    },
+    "ditson-acoustic": {
+      "name": "Ditson Acoustic",
+      "type": "acoustic-piezo",
+      "pickup": "Piezo (starting profile)",
+      "output": "active",
+      "position": "bridge",
+      "tuning": "E A D G B E",
+      "strings": "12-53"
+    }
+  },
+  "matchingEngineV15": {
+    "workflow": [
+      "select actual guitar",
+      "import reference audio",
+      "automatic decode and analysis",
+      "generate GP-50 candidate",
+      "test on physical GP-50",
+      "record capture",
+      "empirical calibration"
+    ],
+    "antiFalsePrecision": true
+  }
+}
